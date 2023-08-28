@@ -6,7 +6,7 @@ This code requires the "mmsegmentation" library. Please follow the instructions 
 
 # Training
 
-Here is an example command to train the late masked models (frozen backbone), where the "vit_large" model is trained with early masking:
+Here is an example command to train the late masked models (frozen backbone), where the "vit_base" model is trained with late masking:
 
 ```
 torchrun \

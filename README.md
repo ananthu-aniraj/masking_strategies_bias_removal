@@ -47,6 +47,7 @@ CUB_200_2011
 ```
 
 
+The segmentation model that we used for early and late masking can be downloaded from [here](https://drive.google.com/file/d/1m1gTCRte-sZ5uD86SeZTh9C-gSlGdVul/view?usp=sharing). 
+This can be used to reproduce the masked datasets used in our experiments.
 
-
-Models will be released soon!
+Please raise an issue if you face any issues with the code or the datasets.

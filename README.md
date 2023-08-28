@@ -50,4 +50,7 @@ CUB_200_2011
 The segmentation model that we used for early and late masking can be downloaded from [here](https://drive.google.com/file/d/1m1gTCRte-sZ5uD86SeZTh9C-gSlGdVul/view?usp=sharing). 
 This can be used to reproduce the masked datasets used in our experiments.
 
+
+Trained models from our experiments will be released soon, however it is already possible to train the models using the code provided in this repository (plus the segmentation model).
+
 Please raise an issue if you face any issues with the code or the datasets.

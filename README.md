@@ -4,9 +4,15 @@ Official implementation of the paper: Masking Strategies for Background Bias Rem
 
 In our research, we focus on fine-grained image classification, such as identifying bird species from images. We identify a common issue where computer vision models learn to associate the species to their habitats (the image background), introducing bias. We propose some simple masking strategies to remove this bias.
 
+![bg_problem drawio](https://github.com/ananthu-aniraj/masking_strategies_bias_removal/assets/50333505/feb600d7-2450-4903-a494-c7035affe095)
+
+
 ## Abstract
 
 Models for fine-grained image classification tasks, where the difference between some classes can be extremely subtle and the number of samples per class tends to be low, are particularly prone to picking up background-related biases and demand robust methods to handle potential examples with out-of-distribution (OOD) backgrounds. To gain deeper insights into this critical problem, our research investigates the impact of background-induced bias on fine-grained image classification, evaluating standard backbone models such as Convolutional Neural Network (CNN) and Vision Transformers (ViT). We explore two masking strategies to mitigate background-induced bias: Early masking, which removes background information at the (input) image level, and late masking, which selectively masks high-level spatial features corresponding to the background. Extensive experiments assess the behavior of CNN and ViT models under different masking strategies, with a focus on their generalization to OOD backgrounds. The obtained findings demonstrate that both proposed strategies enhance OOD performance compared to the baseline models, with early masking consistently exhibiting the best OOD performance. Notably, a ViT variant employing GAP-Pooled Patch token-based classification combined with early masking achieves the highest OOD robustness.
+
+![LM_EM_alternate drawio](https://github.com/ananthu-aniraj/masking_strategies_bias_removal/assets/50333505/462a5653-0e43-443f-836f-6fe6db09a723)
+
 
 ## Setup
 Each folder essentially represents a subproject containing the Python code to run the experiments. The code is written in Python 3.11 and PyTorch 2.0.0 (newer versions will also work, please raise an issue if it doesn't work).

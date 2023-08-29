@@ -63,7 +63,7 @@ This can be used to reproduce the masked datasets used in our experiments (along
 ### CUB Binary Segmentation Dataset
 
 The CUB Binary Segmentation Dataset can be generated from ["segmentations"](https://www.vision.caltech.edu/datasets/cub_200_2011/) provided by the CUB-200-2011 dataset.
-Please note that you need to apply a threshold to the segmentation masks to generate the binary segmentation masks. We used a threshold of 0.5 to generate the binary segmentation masks.
+Please note that you need to apply a threshold to the segmentation masks to generate the binary segmentation masks. We used a threshold of (> 0) to generate the binary segmentation masks.
 
 For training and evaluating the segmentation model, please refer to the instructions in the "mmsegmentation" folder.
 

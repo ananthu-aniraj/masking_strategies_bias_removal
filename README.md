@@ -31,6 +31,8 @@ Alternatively, install PyTorch using instructions from [here](https://pytorch.or
 
 
 ## Datasets
+
+### CUB-200-2011
 We use the CUB-200-2011 dataset for training the models. The dataset can be downloaded from [here](https://www.vision.caltech.edu/datasets/cub_200_2011/). 
 
 NOTE: Download "segmentations" if you intend to train/evaluate the segmentation models. Otherwise, just download the images and annotations.
@@ -56,8 +58,29 @@ CUB_200_2011
 
 
 The segmentation model that we used for early and late masking can be downloaded from [here](https://drive.google.com/file/d/1m1gTCRte-sZ5uD86SeZTh9C-gSlGdVul/view?usp=sharing). 
-This can be used to reproduce the masked datasets used in our experiments.
+This can be used to reproduce the masked datasets used in our experiments (along with training the late masked models).
 
+### CUB Binary Segmentation Dataset
+
+The CUB Binary Segmentation Dataset can be generated from ["segmentations"](https://www.vision.caltech.edu/datasets/cub_200_2011/) provided by the CUB-200-2011 dataset.
+Please note that you need to apply a threshold to the segmentation masks to generate the binary segmentation masks. We used a threshold of 0.5 to generate the binary segmentation masks.
+
+For training and evaluating the segmentation model, please refer to the instructions in the "mmsegmentation" folder.
+
+The dataset should be stored in the following format:
+
+```
+cub_binary_segmentation
+├── annotations
+│   ├── test
+│   └── train
+└── images
+    ├── test
+    ├── train
+    └── waterbird_test
+```
+
+## Models
 
 Trained models from our experiments will be released soon, however it is already possible to train the models using the code provided in this repository (plus the segmentation model).
 

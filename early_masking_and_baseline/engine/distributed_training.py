@@ -210,6 +210,7 @@ class DistributedTrainer:
     def train(self):
         for epoch in range(self.epochs_run, self.max_epochs):
             epoch += 1
+            self.model.train()
             train_loss, train_acc = self._run_epoch(epoch, self.train_loader, train=True)
             if self.local_rank == 0 and epoch % self.save_every == 0:
                 self._save_snapshot(epoch)
@@ -217,6 +218,7 @@ class DistributedTrainer:
                 self._save_snapshot(epoch)
             # eval run
             if self.test_loader:
+                self.model.eval()
                 test_loss, test_acc = self._run_epoch(epoch, self.test_loader, train=False)
             if self.local_rank == 0 and self.global_rank == 0:
                 self.epoch_test_accuracies.append(test_acc)

@@ -191,7 +191,8 @@ class DistributedTrainer:
 
             if it % self.log_freq == 0:
                 print(f"[GPU{self.global_rank}] Epoch {epoch} | Iter {it} | {step_type} Loss {batch_loss:.5f}")
-        self.scheduler.step()
+        if train:
+            self.scheduler.step()
         loss /= len(dataloader)
         if acc is not None:
             acc /= len(dataloader)

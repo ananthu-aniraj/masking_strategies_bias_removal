@@ -2,7 +2,7 @@
 
 Official implementation of the paper: Masking Strategies for Background Bias Removal in Computer Vision Models, accepted at ICCVW-OODCV 2023.
 
-[[`Arxiv`]](https://arxiv.org/abs/2308.12127)
+[[`Arxiv`]](https://arxiv.org/abs/2308.12127) [[`ICCVW-OODCV 2023`](https://openaccess.thecvf.com/content/ICCV2023W/OODCV/html/Aniraj_Masking_Strategies_for_Background_Bias_Removal_in_Computer_Vision_Models_ICCVW_2023_paper.html)] [[`BibTeX`](#citation)]
 
 In our research, we focus on fine-grained image classification, such as identifying bird species from images. We identify a common issue where computer vision models learn to associate the species to their habitats (the image background), introducing bias. We propose some simple masking strategies to remove this bias.
 

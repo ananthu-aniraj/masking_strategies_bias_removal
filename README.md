@@ -85,3 +85,18 @@ cub_binary_segmentation
 Trained models from our experiments will be released soon, however it is already possible to train the models using the code provided in this repository (plus the segmentation model).
 
 Please raise an issue if you face any issues with the code or the datasets.
+
+## Citation
+
+If you find this work useful, please cite our paper:
+
+``` 
+@InProceedings{Aniraj_2023_ICCV,
+    author    = {Aniraj, Ananthu and Dantas, Cassio F. and Ienco, Dino and Marcos, Diego},
+    title     = {Masking Strategies for Background Bias Removal in Computer Vision Models},
+    booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV) Workshops},
+    month     = {October},
+    year      = {2023},
+    pages     = {4397-4405}
+}
+```

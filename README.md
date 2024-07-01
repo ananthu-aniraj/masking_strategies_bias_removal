@@ -79,7 +79,7 @@ cub_binary_segmentation
 
 ## Models
 
-The segmentation model that we used for early and late masking can be downloaded from [here](https://drive.google.com/file/d/1m1gTCRte-sZ5uD86SeZTh9C-gSlGdVul/view?usp=sharing). 
+The segmentation model that we used for early and late masking can be downloaded from [here](https://github.com/ananthu-aniraj/masking_strategies_bias_removal/releases/download/%23model_release/mask2former_swint_iter_160000.pth). 
 This can be used to reproduce the masked datasets used in our experiments (along with training the late masked models).
 
 

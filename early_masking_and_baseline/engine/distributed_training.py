@@ -37,6 +37,8 @@ class DistributedTrainer:
     ) -> None:
         self.local_rank = int(os.environ["LOCAL_RANK"])
         self.global_rank = int(os.environ["RANK"])
+        self.world_size = int(os.environ["WORLD_SIZE"])
+        self.local_world_size = int(os.environ["LOCAL_WORLD_SIZE"])
         self.model = model.to(self.local_rank)
         self.train_dataset = train_dataset
         self.test_dataset = test_dataset
@@ -97,13 +99,14 @@ class DistributedTrainer:
         )
 
     def _load_snapshot(self) -> None:
+        loc = f"cuda:{self.local_rank}"
         try:
             if self.is_snapshot_dir:
                 snapshot = fsspec.open(os.path.join(self.snapshot_path, f"snapshot_best.pt"))
             else:
                 snapshot = fsspec.open(self.snapshot_path)
             with snapshot as f:
-                snapshot_data = torch.load(f, map_location="cpu")
+                snapshot_data = torch.load(f, map_location=loc)
         except FileNotFoundError:
             print("Snapshot not found. Training model from scratch")
             return

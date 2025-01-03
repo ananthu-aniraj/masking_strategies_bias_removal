@@ -72,7 +72,10 @@ class DistributedTrainer:
         self.epoch_test_accuracies = []
 
         if use_amp:
-            self.scaler = torch.cuda.amp.GradScaler()
+            try:
+                self.scaler = torch.GradScaler(device="cuda")
+            except AttributeError:
+                self.scaler = torch.cuda.amp.GradScaler()
 
         if os.path.isfile(os.path.join(snapshot_path, f"snapshot_best.pt")):
             print("Loading snapshot")
@@ -132,12 +135,16 @@ class DistributedTrainer:
 
             outputs = self.model(source)
 
+            if train:
+                loss = self.loss_fn_train(outputs, targets)
+            else:
+                loss = self.loss_fn_eval(outputs, targets)
         if train:
-            loss = self.loss_fn_train(outputs, targets)
             self.optimizer.zero_grad(set_to_none=True)
             if self.use_amp:
                 self.scaler.scale(loss).backward()
                 if self.grad_norm_clip:
+                    self.scaler.unscale_(self.optimizer)
                     torch.nn.utils.clip_grad_norm_(self.model.parameters(), self.grad_norm_clip)
                 self.scaler.step(self.optimizer)
                 self.scaler.update()
@@ -146,8 +153,6 @@ class DistributedTrainer:
                 if self.grad_norm_clip:
                     torch.nn.utils.clip_grad_norm_(self.model.parameters(), self.grad_norm_clip)
                 self.optimizer.step()
-        else:
-            loss = self.loss_fn_eval(outputs, targets)
 
         return outputs, loss.item()
 

@@ -72,7 +72,10 @@ class DistributedTrainer:
         self.max_epochs = max_epochs
         self.mixup_fn = mixup_fn
         if use_amp:
-            self.scaler = torch.cuda.amp.GradScaler()
+            try:
+                self.scaler = torch.GradScaler(device="cuda")
+            except AttributeError:
+                self.scaler = torch.cuda.amp.GradScaler()
 
         if os.path.isfile(os.path.join(snapshot_path, f"snapshot_best.pt")):
             print("Loading snapshot")
@@ -147,13 +150,17 @@ class DistributedTrainer:
         with torch.set_grad_enabled(train), torch.amp.autocast(device_type="cuda", dtype=torch.float16,
                                                                enabled=self.use_amp):
             outputs = self.model.forward_feat_ddp(source, train)
+            if train:
+                loss = self.loss_fn_train(outputs, targets)
+            else:
+                loss = self.loss_fn_eval(outputs, targets)
 
         if train:
-            loss = self.loss_fn_train(outputs, targets)
             self.optimizer.zero_grad(set_to_none=True)
             if self.use_amp:
                 self.scaler.scale(loss).backward()
                 if self.grad_norm_clip:
+                    self.scaler.unscale_(self.optimizer)
                     torch.nn.utils.clip_grad_norm_(self.model.parameters(), self.grad_norm_clip)
                 if self.model.backward_hook is not None:
                     self.model.backward_hook.remove()
@@ -166,8 +173,6 @@ class DistributedTrainer:
                 if self.model.backward_hook is not None:
                     self.model.backward_hook.remove()
                 self.optimizer.step()
-        else:
-            loss = self.loss_fn_eval(outputs, targets)
 
         return outputs, loss.item()
 

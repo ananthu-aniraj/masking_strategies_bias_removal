@@ -11,7 +11,7 @@ from torch.utils.data import DataLoader
 from torch.utils.data.distributed import DistributedSampler
 from timm.data import Mixup
 
-from .utils import ddp_setup, Snapshot, set_seeds, init_wandb
+from .utils import ddp_setup, Snapshot, set_seeds, init_wandb, save_on_master, get_state_dict
 
 
 class DistributedTrainer:
@@ -189,15 +189,12 @@ class DistributedTrainer:
     def _save_snapshot(self, epoch, save_best: bool = False):
         # capture snapshot
         model = self.model
-        raw_model = model.module if hasattr(model, "module") else model
-        snapshot = Snapshot(
-            model_state=raw_model.state_dict(),
-            optimizer_state=self.optimizer.state_dict(),
-            finished_epoch=epoch,
-            epoch_test_accuracies=self.epoch_test_accuracies,
-        )
-        # save snapshot
-        snapshot = asdict(snapshot)
+        snapshot = {
+            "model_state": get_state_dict(model),
+            "optimizer_state": self.optimizer.state_dict(),
+            "finished_epoch": epoch,
+            "epoch_test_accuracies": self.epoch_test_accuracies,
+        }
         if self.is_snapshot_dir:
             save_path_base = self.snapshot_path
         else:
@@ -209,8 +206,7 @@ class DistributedTrainer:
         else:
             save_path = os.path.join(save_path_base, f"snapshot_{epoch}.pt")
 
-        torch.save(snapshot, save_path)
-        print(f"Snapshot saved at epoch {epoch}")
+        save_on_master(snapshot, save_path)
 
     def finish_logging(self):
         for logger in self.loggers:

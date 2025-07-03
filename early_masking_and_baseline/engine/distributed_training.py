@@ -124,6 +124,8 @@ class DistributedTrainer:
         if self.eval_only:
             return
         self.optimizer.load_state_dict(snapshot.optimizer_state)
+        if self.use_amp:
+            self.scaler.load_state_dict(snapshot.scaler_state)
         self.epochs_run = snapshot.finished_epoch
         if snapshot.epoch_test_accuracies is not None:
             self.epoch_test_accuracies = copy.deepcopy(snapshot.epoch_test_accuracies)
@@ -192,6 +194,7 @@ class DistributedTrainer:
         snapshot = {
             "model_state": get_state_dict(model),
             "optimizer_state": self.optimizer.state_dict(),
+            "scaler_state": self.scaler.state_dict() if self.use_amp else {},
             "finished_epoch": epoch,
             "epoch_test_accuracies": self.epoch_test_accuracies,
         }

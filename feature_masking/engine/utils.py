@@ -15,6 +15,7 @@ import os
 class Snapshot:
     model_state: 'OrderedDict[str, torch.Tensor]'
     optimizer_state: Dict[str, Any]
+    scaler_state: Dict[str, Any]
     finished_epoch: int
     epoch_test_accuracies: List[float] = None
 

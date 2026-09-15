@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Project page for 'Masking Strategies for Background Bias Removal in Computer Vision Models', ICCVW-OODCV 2023.">
+  <meta name="keywords"
+        content="Masking Strategies, Background Bias, Out-of-Distribution Generalization, OOD-CV, ICCV 2023, Vision Transformers, ConvNeXt, Early Masking, Late Masking, Fine-grained Classification, CUB-200-2011, Waterbirds">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Masking Strategies for Background Bias Removal in Computer Vision Models | ICCVW 2023</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <!-- Bulma & Icons -->
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎭</text></svg>">
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .section {
+      padding: 2.25rem 1.5rem !important;
+    }
+
+    .publication-title {
+      font-family: 'Google Sans', sans-serif;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 0.75rem !important;
+    }
+
+    .publication-venue {
+      margin: 0.5rem auto 1rem auto;
+    }
+
+    .venue-tag {
+      background-color: #e8f0fe;
+      color: #1a56db;
+      font-weight: 700;
+      border-radius: 9999px;
+      padding: 0.4rem 1.1rem;
+      display: inline-block;
+      font-size: 1.05rem;
+      box-shadow: 0 2px 5px rgba(26, 86, 219, 0.12);
+      border: 1px solid #bfdbfe;
+    }
+
+    .author-block {
+      font-size: 1.15rem;
+      margin: 0 0.4rem;
+    }
+
+    .author-block a {
+      color: #1a56db !important;
+      font-weight: 500;
+    }
+
+    .author-block a:hover {
+      text-decoration: underline;
+    }
+
+    .affiliations {
+      margin-top: 0.85rem;
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .affiliations sup {
+      font-weight: 600;
+      color: #1a56db;
+    }
+
+    .correspondence {
+      margin-top: 0.35rem;
+      font-size: 0.88rem;
+      color: #666;
+    }
+
+    .publication-links {
+      margin-top: 1.25rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .publication-links .button {
+      margin: 0.25rem 0.2rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+      transition: all 0.2s ease-in-out;
+    }
+
+    .publication-links .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .paper-figure {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+      border: 1px solid #e2e8f0;
+      background: #ffffff;
+    }
+
+    .figure-caption {
+      margin-top: 0.85rem;
+      font-size: 0.95rem;
+      color: #4a4a4a;
+      line-height: 1.55;
+      text-align: justify;
+    }
+
+    .hero.is-light {
+      background-color: #f8fafc;
+      border-top: 1px solid #edf2f7;
+      border-bottom: 1px solid #edf2f7;
+    }
+
+    /* Abstract container */
+    .abstract-box {
+      background-color: #ffffff;
+      border-left: 4px solid #1a56db;
+      border-radius: 6px;
+      padding: 1.5rem 1.75rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      border-top: 1px solid #f1f5f9;
+      border-right: 1px solid #f1f5f9;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    /* Key takeaway cards */
+    .takeaway-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 1.35rem;
+      height: 100%;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      transition: all 0.2s ease;
+    }
+
+    .takeaway-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+      border-color: #cbd5e1;
+    }
+
+    .takeaway-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.6rem;
+      display: inline-block;
+    }
+
+    .takeaway-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 0.4rem;
+    }
+
+    .takeaway-desc {
+      font-size: 0.9rem;
+      color: #475569;
+      line-height: 1.5;
+    }
+
+    /* Method Strategy Cards */
+    .strategy-card {
+      background: #ffffff;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.04);
+      padding: 1.5rem;
+      height: 100%;
+    }
+
+    .strategy-card.early {
+      border-top: 4px solid #059669;
+    }
+
+    .strategy-card.late {
+      border-top: 4px solid #2563eb;
+    }
+
+    .strategy-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+
+    .strategy-card.early .strategy-title {
+      color: #059669;
+    }
+
+    .strategy-card.late .strategy-title {
+      color: #2563eb;
+    }
+
+    /* Math formula callout */
+    .math-callout {
+      background-color: #f8fafc;
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin: 0.85rem 0;
+      border: 1px solid #e2e8f0;
+      text-align: center;
+      font-size: 1.05rem;
+    }
+
+    /* Results Table Styles */
+    .table-container {
+      overflow-x: auto;
+      margin: 1.25rem 0;
+    }
+
+    .results-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+      background: #ffffff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+    }
+
+    .results-table th {
+      background-color: #0f172a;
+      color: #f8fafc;
+      padding: 10px 14px;
+      font-weight: 600;
+      text-align: center;
+      border: 1px solid #1e293b;
+    }
+
+    .results-table td {
+      padding: 9px 12px;
+      text-align: center;
+      border-bottom: 1px solid #e2e8f0;
+      border-right: 1px solid #f1f5f9;
+      color: #334155;
+    }
+
+    .results-table tbody tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    .results-table tbody tr:hover {
+      background-color: #f1f5f9;
+    }
+
+    .results-table .highlight-best {
+      font-weight: 700;
+      color: #0f766e;
+      background-color: #ccfbf1 !important;
+    }
+
+    .results-table .highlight-col {
+      background-color: #eff6ff;
+    }
+
+    .badge-gain {
+      background-color: #dcfce7;
+      color: #15803d;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 4px;
+      display: inline-block;
+    }
+
+    .badge-drop {
+      background-color: #fee2e2;
+      color: #b91c1c;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 4px;
+      display: inline-block;
+    }
+
+    /* Tabs */
+    .tabs.is-boxed li.is-active a {
+      background-color: #ffffff;
+      border-color: #cbd5e1;
+      border-bottom-color: transparent !important;
+      font-weight: 700;
+      color: #1a56db;
+    }
+
+    .tabs.is-boxed a {
+      font-weight: 500;
+      color: #475569;
+    }
+
+    .tab-pane {
+      display: none;
+    }
+
+    .tab-pane.is-active {
+      display: block;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* BibTeX block */
+    .bibtex-wrapper {
+      position: relative;
+    }
+
+    .copy-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      color: #334155;
+    }
+
+    .copy-button:hover {
+      background: #ffffff;
+      border-color: #94a3b8;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+    }
+
+    .copy-button.copied {
+      background: #059669;
+      color: #ffffff;
+      border-color: #059669;
+    }
+
+    pre code {
+      font-size: 0.88rem;
+      border-radius: 8px;
+      background-color: #1e293b !important;
+      color: #e2e8f0 !important;
+      display: block;
+      padding: 1.25rem !important;
+      overflow-x: auto;
+      line-height: 1.6;
+    }
+  </style>
+
+  <!-- MathJax Configuration -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)'], ['$', '$']],
+        displayMath: [['\\[', '\\]'], ['$$', '$$']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+  <!-- HERO HEADER -->
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            
+            <h1 class="title is-1 publication-title">
+              Masking Strategies for Background Bias Removal in Computer Vision Models
+            </h1>
+
+            <div class="publication-venue">
+              <span class="venue-tag">
+                <i class="fas fa-university mr-2"></i> ICCV 2023 Workshops (OOD-CV) &middot; Paris, France
+              </span>
+            </div>
+
+            <div class="publication-authors">
+              <span class="author-block">
+                <a href="https://ananthu-aniraj.github.io/" target="_blank">Ananthu Aniraj</a><sup>1,3,4,5,*</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://cassiofragadantas.github.io/" target="_blank">Cassio F. Dantas</a><sup>2,3,5</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://www.lirmm.fr/~ienco/" target="_blank">Dino Ienco</a><sup>2,3,5</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://dmarcosg.github.io/" target="_blank">Diego Marcos</a><sup>1,3,4,5</sup>
+              </span>
+            </div>
+
+            <div class="affiliations">
+              <span class="author-block"><sup>1</sup>Inria</span> &middot;
+              <span class="author-block"><sup>2</sup>INRAE</span> &middot;
+              <span class="author-block"><sup>3</sup>University of Montpellier</span> &middot;
+              <span class="author-block"><sup>4</sup>LIRMM</span> &middot;
+              <span class="author-block"><sup>5</sup>UMR-TETIS</span>
+            </div>
+
+            <div class="correspondence">
+              <span><sup>*</sup>Corresponding Author: <code>ananthu.aniraj@inria.fr</code></span>
+            </div>
+
+            <!-- ACTION BUTTONS -->
+            <div class="publication-links">
+
+              <!-- CVF Published Paper Link -->
+              <span class="link-block">
+                <a href="https://openaccess.thecvf.com/content/ICCV2023W/OODCV/html/Aniraj_Masking_Strategies_for_Background_Bias_Removal_in_Computer_Vision_Models_ICCVW_2023_paper.html" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-file-alt"></i></span>
+                  <span>CVF Paper</span>
+                </a>
+              </span>
+
+              <!-- PDF Link -->
+              <span class="link-block">
+                <a href="https://openaccess.thecvf.com/content/ICCV2023W/OODCV/papers/Aniraj_Masking_Strategies_for_Background_Bias_Removal_in_Computer_Vision_Models_ICCVW_2023_paper.pdf" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                  <span>Paper PDF</span>
+                </a>
+              </span>
+
+              <!-- arXiv Link -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2308.12127" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="ai ai-arxiv"></i></span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+
+              <!-- Code Link -->
+              <span class="link-block">
+                <a href="https://github.com/ananthu-aniraj/masking_strategies_bias_removal" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-github"></i></span>
+                  <span>Code</span>
+                </a>
+              </span>
+
+              <!-- Model Release -->
+              <span class="link-block">
+                <a href="https://github.com/ananthu-aniraj/masking_strategies_bias_removal/releases/download/model_release/mask2former_swint_iter_160000.pth" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-cube"></i></span>
+                  <span>Pretrained Model</span>
+                </a>
+              </span>
+
+              <!-- BibTeX Link -->
+              <span class="link-block">
+                <a href="#bibtex"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-quote-right"></i></span>
+                  <span>BibTeX</span>
+                </a>
+              </span>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEASER / PROBLEM STATEMENT -->
+  <section class="hero is-light is-small" id="problem">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3 has-text-centered">Background Bias in Fine-Grained Classification</h2>
+            <figure>
+              <img class="paper-figure"
+                   src="./static/images/bg_problem.png"
+                   alt="Background bias in fine-grained bird species classification: standard models rely on habitat background cues">
+              <figcaption class="figure-caption">
+                <strong>Figure 1: Background bias in fine-grained classification.</strong> 
+                Computer vision models trained on object-centric tasks (such as fine-grained bird species classification in CUB-200-2011) inadvertently learn spurious correlations between species and their typical habitat backgrounds (e.g. waterbirds appearing on water). When tested in real-world scenarios on Out-of-Distribution (OOD) backgrounds (e.g. waterbirds appearing in a bamboo forest from Places365), standard deep models suffer drastic accuracy drops due to shortcut learning.
+              </figcaption>
+            </figure>
+
+            <div class="columns is-multiline mt-4">
+              <div class="column is-one-third">
+                <div class="takeaway-card">
+                  <span class="takeaway-icon">🎯</span>
+                  <div class="takeaway-title">Subtle Distinctions</div>
+                  <div class="takeaway-desc">Fine-grained categories share almost identical visual traits, making models prone to relying on external habitat shortcuts.</div>
+                </div>
+              </div>
+              <div class="column is-one-third">
+                <div class="takeaway-card">
+                  <span class="takeaway-icon">🌲</span>
+                  <div class="takeaway-title">Spurious Correlations</div>
+                  <div class="takeaway-desc">Strong co-occurrence between bird species and environmental backgrounds leads models to classify the scene rather than the animal.</div>
+                </div>
+              </div>
+              <div class="column is-one-third">
+                <div class="takeaway-card">
+                  <span class="takeaway-icon">📉</span>
+                  <div class="takeaway-title">Severe OOD Degradation</div>
+                  <div class="takeaway-desc">Deploying on novel environments causes baseline models to drop up to <strong>30%</strong> in Top-1 accuracy when the background changes.</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABSTRACT -->
+  <section class="section" id="abstract">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3 has-text-centered">Abstract</h2>
+          <div class="abstract-box content has-text-justified">
+            <p>
+              Models for fine-grained image classification tasks, where the difference between some classes can be extremely subtle and the number of samples per class tends to be low, are particularly prone to picking up background-related biases and demand robust methods to handle potential examples with out-of-distribution (OOD) backgrounds.
+            </p>
+            <p>
+              To gain deeper insights into this critical problem, our research investigates the impact of background-induced bias on fine-grained image classification, evaluating standard backbone models such as Convolutional Neural Networks (CNNs) and Vision Transformers (ViTs). We explore two masking strategies to mitigate background-induced bias: <strong>Early masking</strong>, which removes background information at the (input) image level, and <strong>late masking</strong>, which selectively masks high-level spatial features corresponding to the background.
+            </p>
+            <p>
+              Extensive experiments assess the behavior of CNN and ViT models under different masking strategies, with a focus on their generalization to OOD backgrounds. The obtained findings demonstrate that both proposed strategies enhance OOD performance compared to baseline models, with <strong>early masking consistently exhibiting the best OOD performance</strong>. Notably, a ViT variant employing <strong>GAP-Pooled Patch token-based classification combined with early masking achieves the highest OOD robustness</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- METHODOLOGY -->
+  <section class="section" id="methodology">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3 has-text-centered">Masking Strategies</h2>
+          
+          <figure class="mb-5">
+            <img class="paper-figure"
+                 src="./static/images/LM_EM_alternate.png"
+                 alt="Early and late masking strategies for background bias removal">
+            <figcaption class="figure-caption">
+              <strong>Figure 2: Overview of the proposed Early and Late Masking strategies.</strong> 
+              <em>(Left)</em> <strong>Early Masking:</strong> The binary foreground mask is applied directly at the input image stage, filtering out all background pixels before feature extraction. 
+              <em>(Right)</em> <strong>Late Masking:</strong> The full image is processed through the backbone, and background-related high-level spatial features are selectively masked out prior to the classification head.
+            </figcaption>
+          </figure>
+
+          <!-- STRATEGY CARDS -->
+          <div class="columns is-centered mt-2">
+            
+            <!-- EARLY MASKING -->
+            <div class="column is-half">
+              <div class="strategy-card early">
+                <div class="strategy-title">
+                  <i class="fas fa-layer-group mr-2"></i> Early Masking (EM)
+                </div>
+                <p class="is-size-6 text-muted mb-2">
+                  Masking at the input image stage ($L = 0$). Background pixels are suppressed prior to entering the backbone:
+                </p>
+                <div class="math-callout">
+                  $$\mathbf{y} = g_{\theta_2}\big(h_{\theta_1}(\mathbf{x} \odot \mathbf{m})\big)$$
+                </div>
+                <ul class="mt-3 is-size-7" style="line-height: 1.6;">
+                  <li><strong>$\mathbf{x} \in \mathbb{R}^{3 \times M \times N}$:</strong> Input RGB image.</li>
+                  <li><strong>$\mathbf{m} \in \{0, 1\}^{1 \times M \times N}$:</strong> Binary foreground mask predicted by a pre-trained Mask2Former network.</li>
+                  <li><strong>$h_{\theta_1}(\cdot)$:</strong> Classification backbone (ConvNeXt or DINOv2 ViT).</li>
+                  <li><strong>$g_{\theta_2}(\cdot)$:</strong> Classification head producing logits $\mathbf{y} \in \mathbb{R}^C$.</li>
+                  <li><strong>Advantage:</strong> Eliminates background shortcuts at the source, preventing spurious contextual representations from forming in both CNNs and ViTs.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- LATE MASKING -->
+            <div class="column is-half">
+              <div class="strategy-card late">
+                <div class="strategy-title">
+                  <i class="fas fa-filter mr-2"></i> Late Masking (LM)
+                </div>
+                <p class="is-size-6 text-muted mb-2">
+                  Masking high-level spatial representations inside the network ($L > 0$):
+                </p>
+                <div class="math-callout">
+                  $$\mathbf{y} = g_{\theta_2}\big(h_{\theta_1}(\mathbf{x}) \odot \mathbf{m}'\big)$$
+                </div>
+                <ul class="mt-3 is-size-7" style="line-height: 1.6;">
+                  <li><strong>$\mathbf{z} = h_{\theta_1}(\mathbf{x}) \in \mathbb{R}^{D \times M' \times N'}$:</strong> Spatial feature tensor output by the backbone ($M' = M/k$, $N' = N/k$).</li>
+                  <li><strong>$\mathbf{m}' \in \{0, 1\}^{1 \times M' \times N'}$:</strong> Downsampled binary foreground mask matching feature resolution.</li>
+                  <li><strong>$g_{\theta_2}(\cdot)$:</strong> Global average pooling (GAP) followed by linear classification layer.</li>
+                  <li><strong>Advantage:</strong> Allows low-level layers to exploit natural image gradients while explicitly removing background activations from the final decision layer.</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- BINARY SEGMENTATION NOTE -->
+          <div class="box mt-4" style="background: #f8fafc; border: 1px solid #e2e8f0;">
+            <div class="media">
+              <div class="media-left">
+                <span class="icon is-large has-text-info"><i class="fas fa-draw-polygon fa-2x"></i></span>
+              </div>
+              <div class="media-content">
+                <h4 class="title is-5 mb-1">Binary Semantic Foreground-Background Segmentation</h4>
+                <p class="is-size-6 has-text-grey-dark">
+                  To obtain the binary foreground mask $\mathbf{m}$, we fine-tune a pre-trained <strong>Mask2Former</strong> model with a <strong>Swin-Tiny</strong> backbone on CUB-200-2011 segmentations. The model generalizes exceptionally well, achieving a Mean Dice score of <strong>96.05%</strong> on CUB bird foregrounds and <strong>91.84%</strong> on out-of-distribution Waterbirds images without any OOD retraining.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIMENTAL RESULTS & TABLES -->
+  <section class="hero is-light is-small" id="results">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3 has-text-centered">Experimental Evaluation</h2>
+            <p class="has-text-centered has-text-grey mb-4">
+              All models are trained exclusively on <strong>CUB-200-2011</strong> (200 bird species, 5,994 train images) and evaluated on both In-Distribution (CUB test) and Out-Of-Distribution adversarial backgrounds (<strong>Waterbirds</strong>, 5,794 images on Places365 backgrounds).
+            </p>
+
+            <!-- TABS -->
+            <div class="tabs is-boxed is-centered mb-4" id="results-tabs">
+              <ul>
+                <li class="is-active" data-target="tab-exp1">
+                  <a><i class="fas fa-chart-bar mr-2"></i> Early Masking vs. Baseline (Table 1)</a>
+                </li>
+                <li data-target="tab-exp2">
+                  <a><i class="fas fa-snowflake mr-2"></i> Frozen vs. Fine-tuned (Table 2)</a>
+                </li>
+                <li data-target="tab-exp3">
+                  <a><i class="fas fa-sitemap mr-2"></i> Masking Stage Ablation (Table 3)</a>
+                </li>
+                <li data-target="tab-exp4">
+                  <a><i class="fas fa-brain mr-2"></i> ViT Token Representations (Table 4)</a>
+                </li>
+                <li data-target="tab-seg">
+                  <a><i class="fas fa-check-circle mr-2"></i> Segmentation Quality</a>
+                </li>
+              </ul>
+            </div>
+
+            <!-- TAB 1: EXP 1 (EARLY MASKING VS BASELINE ACROSS SIZES) -->
+            <div id="tab-exp1" class="tab-pane is-active">
+              <div class="table-container">
+                <table class="results-table">
+                  <thead>
+                    <tr>
+                      <th rowspan="2">Model</th>
+                      <th rowspan="2">Training Setting</th>
+                      <th colspan="2">CUB Test (In-Distribution)</th>
+                      <th colspan="2">Waterbirds Test (Out-of-Distribution)</th>
+                    </tr>
+                    <tr>
+                      <th>Original Test</th>
+                      <th>Masked Test</th>
+                      <th>Original Test</th>
+                      <th>Masked Test</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td rowspan="2"><strong>ConvNeXt-S</strong></td>
+                      <td>Baseline</td>
+                      <td><strong>86.56%</strong></td>
+                      <td>78.60%</td>
+                      <td>55.82%</td>
+                      <td>67.12%</td>
+                    </tr>
+                    <tr>
+                      <td>Early-Masked</td>
+                      <td>83.84%</td>
+                      <td>84.43%</td>
+                      <td>64.21% <span class="badge-gain">+8.39%</span></td>
+                      <td class="highlight-best">77.33% <span class="badge-gain">+10.21%</span></td>
+                    </tr>
+
+                    <tr>
+                      <td rowspan="2"><strong>ConvNeXt-B</strong></td>
+                      <td>Baseline</td>
+                      <td><strong>88.00%</strong></td>
+                      <td>77.52%</td>
+                      <td>65.96%</td>
+                      <td>68.51%</td>
+                    </tr>
+                    <tr>
+                      <td>Early-Masked</td>
+                      <td>84.36%</td>
+                      <td>85.69%</td>
+                      <td>67.21% <span class="badge-gain">+1.25%</span></td>
+                      <td class="highlight-best">80.10% <span class="badge-gain">+11.59%</span></td>
+                    </tr>
+
+                    <tr>
+                      <td rowspan="2"><strong>ConvNeXt-L</strong></td>
+                      <td>Baseline</td>
+                      <td><strong>88.05%</strong></td>
+                      <td>78.68%</td>
+                      <td>66.83%</td>
+                      <td>70.69%</td>
+                    </tr>
+                    <tr>
+                      <td>Early-Masked</td>
+                      <td>87.22%</td>
+                      <td>87.38%</td>
+                      <td>73.67% <span class="badge-gain">+6.84%</span></td>
+                      <td class="highlight-best">82.81% <span class="badge-gain">+12.12%</span></td>
+                    </tr>
+
+                    <tr>
+                      <td rowspan="2"><strong>ViT-S</strong></td>
+                      <td>Baseline</td>
+                      <td><strong>88.26%</strong></td>
+                      <td>82.27%</td>
+                      <td>71.15%</td>
+                      <td>77.59%</td>
+                    </tr>
+                    <tr>
+                      <td>Early-Masked</td>
+                      <td>85.89%</td>
+                      <td>87.92%</td>
+                      <td>78.61% <span class="badge-gain">+7.46%</span></td>
+                      <td class="highlight-best">84.05% <span class="badge-gain">+6.46%</span></td>
+                    </tr>
+
+                    <tr>
+                      <td rowspan="2"><strong>ViT-B</strong></td>
+                      <td>Baseline</td>
+                      <td>89.20%</td>
+                      <td>87.69%</td>
+                      <td>76.65%</td>
+                      <td>83.00%</td>
+                    </tr>
+                    <tr>
+                      <td>Early-Masked</td>
+                      <td>88.35%</td>
+                      <td><strong>90.10%</strong></td>
+                      <td>82.15% <span class="badge-gain">+5.50%</span></td>
+                      <td class="highlight-best">86.93% <span class="badge-gain">+3.93%</span></td>
+                    </tr>
+
+                    <tr>
+                      <td rowspan="2"><strong>ViT-L</strong></td>
+                      <td>Baseline</td>
+                      <td>89.79%</td>
+                      <td>88.91%</td>
+                      <td>80.76%</td>
+                      <td>85.61%</td>
+                    </tr>
+                    <tr>
+                      <td>Early-Masked</td>
+                      <td>88.35%</td>
+                      <td><strong>91.06%</strong></td>
+                      <td>84.67% <span class="badge-gain">+3.91%</span></td>
+                      <td class="highlight-best">88.30% <span class="badge-gain">+2.69%</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="is-size-7 has-text-grey has-text-justified">
+                <strong>Key Takeaway:</strong> Across all model scales (Small, Base, Large) and architectures (ConvNeXt &amp; ViT), <strong>Early Masking consistently outperforms the baseline on OOD Waterbirds</strong>. For ViT-B and ViT-L, early masking also achieves the absolute highest in-distribution accuracy on CUB (<strong>90.10%</strong> and <strong>91.06%</strong>), showing that ViTs are less sensitive to masking boundaries while benefiting from spurious background removal.
+              </p>
+            </div>
+
+            <!-- TAB 2: EXP 2 (FROZEN VS FINE-TUNED) -->
+            <div id="tab-exp2" class="tab-pane">
+              <div class="table-container">
+                <table class="results-table">
+                  <thead>
+                    <tr>
+                      <th rowspan="2">Backbone</th>
+                      <th rowspan="2">Strategy</th>
+                      <th colspan="2">CUB Test (In-Distribution)</th>
+                      <th colspan="2">Waterbirds Test (Out-of-Distribution)</th>
+                    </tr>
+                    <tr>
+                      <th>Frozen Backbone</th>
+                      <th>Fine-tuned</th>
+                      <th>Frozen Backbone</th>
+                      <th>Fine-tuned</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td rowspan="3"><strong>ConvNeXt-B</strong></td>
+                      <td>Baseline</td>
+                      <td>88.00%</td>
+                      <td>89.62%</td>
+                      <td>65.96%</td>
+                      <td>76.20%</td>
+                    </tr>
+                    <tr>
+                      <td>Early-Masked</td>
+                      <td>85.69%</td>
+                      <td class="highlight-best"><strong>90.31%</strong></td>
+                      <td>80.10%</td>
+                      <td class="highlight-best"><strong>87.01%</strong> <span class="badge-gain">+10.81%</span></td>
+                    </tr>
+                    <tr>
+                      <td>Late-Masked</td>
+                      <td>87.66%</td>
+                      <td>88.76%</td>
+                      <td>77.95%</td>
+                      <td>78.42%</td>
+                    </tr>
+
+                    <tr>
+                      <td rowspan="3"><strong>ViT-B</strong></td>
+                      <td>Baseline</td>
+                      <td>89.20%</td>
+                      <td>89.38%</td>
+                      <td>76.55%</td>
+                      <td>68.36% <span class="badge-drop">-8.19%</span></td>
+                    </tr>
+                    <tr>
+                      <td>Early-Masked</td>
+                      <td>90.10%</td>
+                      <td class="highlight-best"><strong>91.37%</strong></td>
+                      <td>86.93%</td>
+                      <td class="highlight-best"><strong>88.81%</strong> <span class="badge-gain">+20.45%</span></td>
+                    </tr>
+                    <tr>
+                      <td>Late-Masked</td>
+                      <td>88.61%</td>
+                      <td>90.73%</td>
+                      <td>76.55%</td>
+                      <td>74.76% <span class="badge-drop">-1.79%</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="is-size-7 has-text-grey has-text-justified">
+                <strong>Critical Finding on Fine-Tuning:</strong> Fine-tuning the baseline ViT-B without masking causes severe overfitting to background correlations, dropping OOD Waterbirds accuracy from <strong>76.55% down to 68.36%</strong> (-8.19%). In sharp contrast, <strong>Early Masking completely protects the ViT</strong>, boosting its OOD accuracy to <strong>88.81%</strong> (+20.45% over fine-tuned baseline) while achieving the highest in-distribution score (<strong>91.37%</strong>).
+              </p>
+            </div>
+
+            <!-- TAB 3: EXP 3 (FEATURE MASKING STAGE ABLATION) -->
+            <div id="tab-exp3" class="tab-pane">
+              <div class="table-container">
+                <table class="results-table">
+                  <thead>
+                    <tr>
+                      <th>Backbone</th>
+                      <th>Feature Masking Stage</th>
+                      <th>CUB Test (%)</th>
+                      <th>Waterbirds OOD (%)</th>
+                      <th>OOD Relative Improvement</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td rowspan="3"><strong>ConvNeXt-S</strong></td>
+                      <td>Stage $L$ (Last Stage)</td>
+                      <td>88.73%</td>
+                      <td>77.19%</td>
+                      <td>Baseline LM</td>
+                    </tr>
+                    <tr>
+                      <td>Stage $L-1$ (Second-to-Last)</td>
+                      <td>89.35%</td>
+                      <td>81.22%</td>
+                      <td><span class="badge-gain">+4.03%</span></td>
+                    </tr>
+                    <tr>
+                      <td>Stage $0$ (Input Image / Early)</td>
+                      <td class="highlight-best"><strong>90.73%</strong></td>
+                      <td class="highlight-best"><strong>87.95%</strong></td>
+                      <td><span class="badge-gain">+10.76%</span></td>
+                    </tr>
+
+                    <tr>
+                      <td rowspan="3"><strong>ConvNeXt-B</strong></td>
+                      <td>Stage $L$ (Last Stage)</td>
+                      <td>88.76%</td>
+                      <td>78.42%</td>
+                      <td>Baseline LM</td>
+                    </tr>
+                    <tr>
+                      <td>Stage $L-1$ (Second-to-Last)</td>
+                      <td>89.04%</td>
+                      <td>80.04%</td>
+                      <td><span class="badge-gain">+1.62%</span></td>
+                    </tr>
+                    <tr>
+                      <td>Stage $0$ (Input Image / Early)</td>
+                      <td class="highlight-best"><strong>90.31%</strong></td>
+                      <td class="highlight-best"><strong>87.01%</strong></td>
+                      <td><span class="badge-gain">+8.59%</span></td>
+                    </tr>
+
+                    <tr>
+                      <td rowspan="3"><strong>ConvNeXt-L</strong></td>
+                      <td>Stage $L$ (Last Stage)</td>
+                      <td>89.80%</td>
+                      <td>79.39%</td>
+                      <td>Baseline LM</td>
+                    </tr>
+                    <tr>
+                      <td>Stage $L-1$ (Second-to-Last)</td>
+                      <td>89.49%</td>
+                      <td>79.68%</td>
+                      <td><span class="badge-gain">+0.29%</span></td>
+                    </tr>
+                    <tr>
+                      <td>Stage $0$ (Input Image / Early)</td>
+                      <td class="highlight-best"><strong>90.99%</strong></td>
+                      <td class="highlight-best"><strong>88.19%</strong></td>
+                      <td><span class="badge-gain">+8.80%</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="is-size-7 has-text-grey has-text-justified">
+                <strong>Receptive Field Analysis:</strong> Moving the masking stage earlier in the network ($L \to L-1 \to 0$) yields monotonic accuracy gains on both CUB and Waterbirds. Earlier CNN layers feature tighter, strictly localized receptive fields that correlate directly with image patches, whereas deeper layers blend background context into foreground feature channels.
+              </p>
+            </div>
+
+            <!-- TAB 4: EXP 4 (VIT TOKEN REPRESENTATIONS) -->
+            <div id="tab-exp4" class="tab-pane">
+              <div class="table-container">
+                <table class="results-table">
+                  <thead>
+                    <tr>
+                      <th rowspan="2">Backbone</th>
+                      <th rowspan="2">Strategy</th>
+                      <th rowspan="2">ViT Representation</th>
+                      <th colspan="2">CUB Test (In-Distribution)</th>
+                      <th colspan="2">Waterbirds Test (Out-of-Distribution)</th>
+                    </tr>
+                    <tr>
+                      <th>Frozen</th>
+                      <th>Fine-tuned</th>
+                      <th>Frozen</th>
+                      <th>Fine-tuned</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td rowspan="9"><strong>ViT-B</strong></td>
+                      <td rowspan="3">Baseline</td>
+                      <td>CLS Token</td>
+                      <td>90.04%</td>
+                      <td><strong>90.47%</strong></td>
+                      <td>80.35%</td>
+                      <td><strong>71.35%</strong></td>
+                    </tr>
+                    <tr>
+                      <td>GAP-Pooled Patch</td>
+                      <td>62.24%</td>
+                      <td>90.05%</td>
+                      <td>24.71%</td>
+                      <td>67.74%</td>
+                    </tr>
+                    <tr>
+                      <td>CLS + Patch</td>
+                      <td>89.20%</td>
+                      <td>89.38%</td>
+                      <td>76.65%</td>
+                      <td>68.36%</td>
+                    </tr>
+
+                    <tr>
+                      <td rowspan="3">Early-Masked</td>
+                      <td>CLS Token</td>
+                      <td>90.33%</td>
+                      <td><strong>91.73%</strong></td>
+                      <td>86.81%</td>
+                      <td>88.60%</td>
+                    </tr>
+                    <tr>
+                      <td>GAP-Pooled Patch</td>
+                      <td>72.17%</td>
+                      <td>91.51%</td>
+                      <td>66.37%</td>
+                      <td class="highlight-best"><strong>89.22%</strong> <span class="badge-gain">Highest OOD</span></td>
+                    </tr>
+                    <tr>
+                      <td>CLS + Patch</td>
+                      <td>90.10%</td>
+                      <td>91.37%</td>
+                      <td>86.93%</td>
+                      <td>88.81%</td>
+                    </tr>
+
+                    <tr>
+                      <td rowspan="3">Late-Masked</td>
+                      <td>CLS Token</td>
+                      <td>89.16%</td>
+                      <td>90.78%</td>
+                      <td>75.10%</td>
+                      <td>80.54%</td>
+                    </tr>
+                    <tr>
+                      <td>GAP-Pooled Patch</td>
+                      <td>84.15%</td>
+                      <td><strong>90.85%</strong></td>
+                      <td>71.63%</td>
+                      <td class="highlight-best"><strong>84.50%</strong></td>
+                    </tr>
+                    <tr>
+                      <td>CLS + Patch</td>
+                      <td>88.61%</td>
+                      <td>90.73%</td>
+                      <td>76.55%</td>
+                      <td>74.76%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="is-size-7 has-text-grey has-text-justified">
+                <strong>ViT Token Insights:</strong> The ViT variant utilizing <strong>Global Average Pooled (GAP) Patch tokens combined with Early Masking achieves the absolute highest OOD robustness (89.22%)</strong> of all evaluated configurations. Because patch tokens preserve explicit spatial locality, masking at the input forces every patch token to encode pure foreground characteristics, eliminating global shortcut cues that bleed into the standard CLS token.
+              </p>
+            </div>
+
+            <!-- TAB 5: SEGMENTATION METRICS -->
+            <div id="tab-seg" class="tab-pane">
+              <div class="table-container">
+                <table class="results-table">
+                  <thead>
+                    <tr>
+                      <th rowspan="2">Segmentation Model</th>
+                      <th rowspan="2">Backbone</th>
+                      <th colspan="2">CUB-200-2011 Mean Dice (%)</th>
+                      <th colspan="2">Waterbirds OOD Mean Dice (%)</th>
+                    </tr>
+                    <tr>
+                      <th>Background</th>
+                      <th>Bird Foreground</th>
+                      <th>Background</th>
+                      <th>Bird Foreground</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>Mask2Former</strong></td>
+                      <td><strong>Swin-T</strong> (Selected)</td>
+                      <td>99.42%</td>
+                      <td>96.05%</td>
+                      <td class="highlight-best"><strong>98.74%</strong></td>
+                      <td class="highlight-best"><strong>91.84%</strong></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Mask2Former</strong></td>
+                      <td>ResNet-50</td>
+                      <td>99.43%</td>
+                      <td><strong>96.12%</strong></td>
+                      <td>98.72%</td>
+                      <td>91.81%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="is-size-7 has-text-grey has-text-justified">
+                <strong>Segmentation Robustness:</strong> Fine-tuned Mask2Former with Swin-Tiny backbone achieves &gt;96% Dice on in-distribution CUB birds and maintains <strong>91.84% Dice on OOD Waterbirds</strong> without seeing a single Waterbirds or Places365 image during training.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEY TAKEAWAYS -->
+  <section class="section" id="takeaways">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3 has-text-centered">Key Findings &amp; Takeaways</h2>
+
+          <div class="columns is-multiline mt-2">
+            <div class="column is-half">
+              <div class="takeaway-card">
+                <span class="takeaway-icon">🥇</span>
+                <div class="takeaway-title">1. Early Masking Dominates OOD Robustness</div>
+                <div class="takeaway-desc">
+                  Masking at the input image level ($L=0$) consistently delivers the highest generalization across both CNNs and ViTs. By removing background pixels before feature extraction, early masking prevents spurious contextual correlations from ever being encoded.
+                </div>
+              </div>
+            </div>
+
+            <div class="column is-half">
+              <div class="takeaway-card">
+                <span class="takeaway-icon">⚠️</span>
+                <div class="takeaway-title">2. Fine-Tuning ViTs Requires Background Masking</div>
+                <div class="takeaway-desc">
+                  When fine-tuned end-to-end without masking, ViTs severely overfit to background cues, experiencing an <strong>8.2% drop</strong> in OOD accuracy. Early masking completely reverses this, enabling fine-tuning to reach peak OOD accuracy of <strong>88.8% &ndash; 89.2%</strong>.
+                </div>
+              </div>
+            </div>
+
+            <div class="column is-half">
+              <div class="takeaway-card">
+                <span class="takeaway-icon">🧩</span>
+                <div class="takeaway-title">3. GAP-Pooled Patch Tokens Outperform CLS Tokens</div>
+                <div class="takeaway-desc">
+                  Classifying via Global Average Pooled (GAP) patch tokens instead of the standard CLS token yields the strongest OOD model (<strong>89.22%</strong> on Waterbirds). Patch tokens enforce spatial locality, preventing contextual leakage into global representations.
+                </div>
+              </div>
+            </div>
+
+            <div class="column is-half">
+              <div class="takeaway-card">
+                <span class="takeaway-icon">📶</span>
+                <div class="takeaway-title">4. Earlier CNN Masking Stages Yield Strictly Better Results</div>
+                <div class="takeaway-desc">
+                  In ConvNeXt models, moving feature masking from the last stage ($L$) to the second-to-last ($L-1$) and finally to the input image ($0$) produces monotonic OOD accuracy improvements ($77.2\% \to 81.2\% \to 88.0\%$) due to smaller, unpolluted receptive fields.
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CODE & PRETRAINED MODELS -->
+  <section class="hero is-light is-small" id="models">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3 has-text-centered">Code &amp; Pre-trained Models</h2>
+            <div class="content has-text-justified">
+              <p>
+                Our implementation supports both <strong>Early Masking</strong> and <strong>Late Feature Masking</strong> across ConvNeXt (Small/Base/Large) and DINOv2 Vision Transformers (Small/Base/Large), along with the complete pipeline for binary foreground segmentation using MMSegmentation.
+              </p>
+            </div>
+
+            <!-- CODE TABS -->
+            <div class="tabs is-boxed is-centered mb-3" id="code-tabs">
+              <ul>
+                <li class="is-active" data-target="code-early">
+                  <a><i class="fas fa-layer-group mr-2"></i> Early Masking</a>
+                </li>
+                <li data-target="code-late">
+                  <a><i class="fas fa-filter mr-2"></i> Late Feature Masking</a>
+                </li>
+                <li data-target="code-seg">
+                  <a><i class="fas fa-draw-polygon mr-2"></i> Segmentation Model</a>
+                </li>
+              </ul>
+            </div>
+
+            <!-- TAB 1: EARLY MASKING -->
+            <div id="code-early" class="tab-pane is-active">
+              <pre><code># Early Masking: Masking at the input image level
+# Code path: early_masking_and_baseline/fine_tune_dinov2.py
+
+import torch
+from torchvision import transforms
+
+def apply_early_masking(image, binary_mask):
+    """
+    image: [B, 3, H, W] normalized input tensor
+    binary_mask: [B, 1, H, W] binary mask where 1=foreground, 0=background
+    """
+    # Element-wise product suppresses all background pixels
+    masked_image = image * binary_mask
+    return masked_image
+
+# Forward pass through backbone and classification head
+# y = g_theta2( h_theta1( x * m ) )
+masked_inputs = apply_early_masking(inputs, masks)
+outputs = model(masked_inputs)</code></pre>
+            </div>
+
+            <!-- TAB 2: LATE MASKING -->
+            <div id="code-late" class="tab-pane">
+              <pre><code># Late Masking: Masking high-level spatial feature representations
+# Code path: feature_masking/layers/fm_net_dinov2.py
+
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+class LateMaskedViT(nn.Module):
+    def __init__(self, backbone, num_classes=200):
+        super().__init__()
+        self.backbone = backbone
+        self.classifier = nn.Linear(backbone.embed_dim, num_classes)
+
+    def forward(self, x, mask):
+        # Extract spatial patch tokens [B, D, H', W']
+        spatial_features = self.backbone.get_intermediate_layers(x)[0]
+        
+        # Downsample binary mask to spatial feature resolution
+        mask_downsampled = F.interpolate(mask, size=spatial_features.shape[-2:], mode='nearest')
+        
+        # Apply late feature masking: y = g( z * m' )
+        masked_features = spatial_features * mask_downsampled
+        
+        # GAP-pooled patch token classification
+        pooled = masked_features.mean(dim=[-2, -1])
+        logits = self.classifier(pooled)
+        return logits</code></pre>
+            </div>
+
+            <!-- TAB 3: SEGMENTATION -->
+            <div id="code-seg" class="tab-pane">
+              <pre><code># Download pre-trained Mask2Former Swin-T checkpoint for CUB foreground extraction:
+# https://github.com/ananthu-aniraj/masking_strategies_bias_removal/releases/download/model_release/mask2former_swint_iter_160000.pth
+
+# Generate binary masked CUB dataset using MMSegmentation:
+python mmsegmentation/gen_masked_image_dataset.py \
+    --config mmsegmentation/configs/mask2former/mask2former_swin-t_cub.py \
+    --checkpoint checkpoints/mask2former_swint_iter_160000.pth \
+    --input_dir data/CUB_200_2011/images \
+    --output_dir data/cub_binary_masked</code></pre>
+            </div>
+
+            <div class="has-text-centered mt-4">
+              <a href="https://github.com/ananthu-aniraj/masking_strategies_bias_removal" target="_blank" class="button is-dark is-rounded mr-2">
+                <span class="icon"><i class="fab fa-github"></i></span>
+                <span>GitHub Repository</span>
+              </a>
+              <a href="https://github.com/ananthu-aniraj/masking_strategies_bias_removal/releases/download/model_release/mask2former_swint_iter_160000.pth" target="_blank" class="button is-link is-outlined is-rounded">
+                <span class="icon"><i class="fas fa-download"></i></span>
+                <span>Download Mask2Former Checkpoint</span>
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BIBTEX -->
+  <section class="section" id="bibtex">
+    <div class="container is-max-desktop content">
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">BibTeX</h2>
+          <div class="bibtex-wrapper">
+            <button class="copy-button" onclick="copyBibtex()">
+              <i class="far fa-copy"></i>
+              <span>Copy</span>
+            </button>
+            <pre><code id="bibtex-code">@InProceedings{Aniraj_2023_ICCV,
+    author    = {Aniraj, Ananthu and Dantas, Cassio F. and Ienco, Dino and Marcos, Diego},
+    title     = {Masking Strategies for Background Bias Removal in Computer Vision Models},
+    booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV) Workshops},
+    month     = {October},
+    year      = {2023},
+    pages     = {4397-4405}
+}</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer" style="padding: 2.5rem 1.5rem; background-color: #f8fafc; border-top: 1px solid #e2e8f0;">
+    <div class="container">
+      <div class="content has-text-centered is-size-7 has-text-grey">
+        <p>
+          This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+        </p>
+        <p>
+          Source code adapted from the academic project website template.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT FOR TABS AND CLIPBOARD -->
+  <script>
+    function copyBibtex() {
+      var copyText = document.getElementById("bibtex-code").innerText;
+      navigator.clipboard.writeText(copyText).then(function() {
+        var btn = document.querySelector(".copy-button");
+        btn.classList.add("copied");
+        btn.innerHTML = '<i class="fas fa-check"></i><span>Copied!</span>';
+        setTimeout(function() {
+          btn.classList.remove("copied");
+          btn.innerHTML = '<i class="far fa-copy"></i><span>Copy</span>';
+        }, 2000);
+      });
+    }
+
+    // Generic tab switcher handler
+    function setupTabs(tabGroupId) {
+      const container = document.getElementById(tabGroupId);
+      if (!container) return;
+      const tabLinks = container.querySelectorAll("li");
+      tabLinks.forEach(function(tab) {
+        tab.addEventListener("click", function() {
+          const targetId = this.getAttribute("data-target");
+          if (!targetId) return;
+
+          tabLinks.forEach(function(t) { t.classList.remove("is-active"); });
+          this.classList.add("is-active");
+
+          // Find sibling panes
+          const parentCol = container.closest(".column") || container.parentElement;
+          const panes = parentCol.querySelectorAll(".tab-pane");
+          panes.forEach(function(pane) {
+            if (pane.id.startsWith("tab-") && targetId.startsWith("tab-")) {
+              pane.classList.remove("is-active");
+            } else if (pane.id.startsWith("code-") && targetId.startsWith("code-")) {
+              pane.classList.remove("is-active");
+            }
+          });
+
+          const targetPane = document.getElementById(targetId);
+          if (targetPane) {
+            targetPane.classList.add("is-active");
+          }
+        });
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      setupTabs("results-tabs");
+      setupTabs("code-tabs");
+    });
+  </script>
+
+</body>
+</html>

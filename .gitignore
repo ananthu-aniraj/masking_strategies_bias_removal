@@ -38,3 +38,6 @@ wheels/
 *.tsv
 wandb/
 exps/
+
+# Allow documentation site assets
+!docs/**
